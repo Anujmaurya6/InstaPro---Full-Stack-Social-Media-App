@@ -1,16 +1,131 @@
-# React + Vite
+# InstaProo - Full Stack Social Media App
+A full-stack social media web app built with React.js and Spring Boot. Features JWT authentication, role-based access control for Admin and User, post approval system, and REST APIs with MySQL database.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🚀 Tech Stack.....
+**Frontend:**
+- React.js (Vite)
+- Tailwind CSS
+- React Router DOM
 
-Currently, two official plugins are available:
+**Backend:**
+- Java 17
+- Spring Boot
+- Spring Security (JWT)
+- Hibernate / JPA
+- MySQL
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+ ## ✨ Features
 
-## React Compiler
+- 🔐 JWT Authentication (Login / Signup)
+- 👤 Role-based access — Admin & User
+- 📝 User can create posts
+- ⏳ Posts go to Admin for approval first
+- ✅ Admin can Approve / Reject posts
+- 👀 Approved posts visible to other users
+- 🛡️ Protected routes — Admin & User dashboards separate
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📁 Project Structure
+# InstaProo - Full Stack Social Media App
 
-## Expanding the ESLint configuration
+A full-stack social media web app built with React.js and Spring Boot. Features JWT authentication, role-based access control for Admin and User, post approval system, and REST APIs with MySQL database.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🚀 Tech Stack
+
+**Frontend:**
+- React.js (Vite)
+- Tailwind CSS
+- React Router DOM
+
+**Backend:**
+- Java 17
+- Spring Boot
+- Spring Security (JWT)
+- Hibernate / JPA
+- MySQL
+
+---
+
+## ✨ Features
+
+- 🔐 JWT Authentication (Login / Signup)
+- 👤 Role-based access — Admin & User
+- 📝 User can create posts
+- ⏳ Posts go to Admin for approval first
+- ✅ Admin can Approve / Reject posts
+- 👀 Approved posts visible to other users
+- 🛡️ Protected routes — Admin & User dashboards separate
+
+---
+
+## 📁 Project Structure
+```
+src/
+├── api/          → authApi.js, postApi.js
+├── components/   → AdminNavbar.jsx
+├── pages/        → Login, Signup, UserFeed, AdminDashboard, AdminPending
+├── routes/       → PrivateRoute, AdminRoute, AppRoutes
+└── utils/        → auth.js
+```
+
+---
+
+## ⚙️ Backend Setup
+```
+Port: 8080
+Database: MySQL (instapro_db)
+```
+
+**Default Admin Credentials:**
+```
+Username: admin
+Password: admin@123
+```
+Admin is auto-created when Spring Boot starts.
+
+---
+
+## 🖥️ Frontend Setup
+```bash
+cd insta-project
+npm install
+npm run dev
+```
+Runs on: `http://localhost:5173`
+
+---
+
+## 🗄️ Database Setup
+```sql
+CREATE DATABASE instapro_db;
+USE instapro_db;
+
+CREATE TABLE users (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(150),
+    mobile VARCHAR(20),
+    role VARCHAR(20) NOT NULL DEFAULT 'USER'
+);
+
+CREATE TABLE posts (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    content TEXT NOT NULL,
+    status VARCHAR(20) DEFAULT 'PENDING',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    user_id BIGINT,
+    CONSTRAINT fk_user
+        FOREIGN KEY (user_id) REFERENCES users(id)
+        ON DELETE CASCADE
+);
+```
+
+---
+
+## 👨‍💻 Author
+
+**Anuj Maurya**  
+B.Tech AIML | Java Full Stack Developer  
+[GitHub](https://github.com/Anujmaurya6)
